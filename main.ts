@@ -69,10 +69,10 @@ let coolUntil = -1;
 
 await runBars({
   onBatch(state, batch) {
-    const bar = batch.bars.find((b) => b.symbol === SYMBOL);
-    if (bar === undefined) return [];
-
-    // Fills of orders decided on the previous batch arrive here.
+    // Fills of orders decided on the previous batch arrive here. Process
+    // them even when this batch carries no CBBTC bar (a minute the
+    // recorder missed): dropping a fill report would leave pendingBuy
+    // stuck and block every later entry, the fallback included.
     for (const f of batch.fills) {
       if (f.status === 'filled') everTraded = true;
       if (f.side === 'buy') {
@@ -80,6 +80,9 @@ await runBars({
         if (f.status === 'filled') filledBuys++;
       }
     }
+
+    const bar = batch.bars.find((b) => b.symbol === SYMBOL);
+    if (bar === undefined) return [];
 
     const close = Number(bar.c);
     closes.push(close);
