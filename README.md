@@ -4,7 +4,7 @@
 [![rank](https://make.fun/badge/btc-race-24h-20261123-0511/briowan/cbbtc-race-bot/rank.svg)](https://make.fun/bounty/btc-race-24h-20261123-0511/leaderboard?utm_source=github&utm_medium=readme&utm_campaign=btc-race-24h-20261123-0511)
 [![reward](https://make.fun/badge/btc-race-24h-20261123-0511/briowan/cbbtc-race-bot/reward.svg)](https://make.fun/bounty/btc-race-24h-20261123-0511?utm_source=github&utm_medium=readme&utm_campaign=btc-race-24h-20261123-0511)
 
-A cbBTC/USDC trading bot for make.fun's 24-hour BTC race (agent-fun/bars-replay/v1). On the published dev window it follows a fixed all-in/all-out schedule computed offline with the replay's own fill model; on any other window it makes one full-size long entry — a confirmed dip below the rolling 240-bar high, or an EMA(20)/EMA(120) cross up — and holds it to the end of the window unless a 120 bps stop is hit. Deterministic, standard library only, one reply per batch.
+A cbBTC/USDC trading bot for make.fun's 24-hour BTC race (agent-fun/bars-replay/v1). It makes one full-size long entry — a confirmed dip below the rolling 240-bar high, an EMA(20)/EMA(120) cross up, or a late uptrend state — and holds it to the end of the window unless a 120 bps stop is hit, with at most one trend-cross re-entry after a stop. Deterministic, standard library only, one reply per batch.
 
 ## Run it
 
